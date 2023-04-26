@@ -4,7 +4,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
+from sklearn.preprocessing import StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.model_selection import train_test_split
 
 flights_data = pd.read_csv("flight_dataset.csv")
 flights_data.drop(columns=["Unnamed: 0"],inplace=True)
@@ -21,80 +23,37 @@ sns.histplot(data=flights_data['duration'])
 sns.histplot(data=flights_data['days_left'])
 sns.histplot(data=flights_data['price'])
 
+categorical_cols = ['airline','source_city','departure_time','stops','arrival_time','destination_city','class']
+for col in categorical_cols:
+    print(f"\n\n {col} \n\n",flights_data[f"{col}"].value_counts())
+
 flights_data.nunique()
+flights_data.drop('flight',axis=1,inplace=True)
 
+X = flights_data.drop('price',axis=1)
+y = flights_data[['price']]
 
+stratify_cols = ['airline','departure_time','stops','class' ]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=flights_data[stratify_cols],random_state=42)
 
-flights_data['stops'] = flights_data['stops'].replace({'zero': 0, 'one': 1, 'two_or_more': 2})
+X_train_transformed = pd.get_dummies(X_train, columns = categorical_cols,drop_first=True)
+X_test_transformed = pd.get_dummies(X_test, columns = categorical_cols,drop_first=True)
 
-flights_departuretime = flights_data[["departure_time"]]
-flights_arrivaltime = flights_data[["arrival_time"]]
-flights_sourcecity = flights_data[["source_city"]]
-flights_destinationcity = flights_data[["destination_city"]]
+X_train_transformed['stops'] = X_train_transformed['stops'].replace({'zero':0,'one':1,'two_or_more':2})
+X_test_transformed['stops'] = X_test_transformed['stops'].replace({'zero':0,'one':1,'two_or_more':2})
 
+num_cols = ['duration','days_left']
+ct = ColumnTransformer(
+    [('scale', StandardScaler(), num_cols)], 
+    remainder='passthrough')
 
-Encoder = OneHotEncoder(drop='first',sparse=False)
+num_scaled_train = ct.fit_transform(X_train_transformed[['duration','days_left']])
+num_scaled_test = ct.transform(X_test_transformed[['duration','days_left']])
 
-encoding_sourcecities = Encoder.fit_transform(flights_sourcecity)
-encoding_destinationcities = Encoder.transform(flights_destinationcity)
+X_train_transformed.iloc[:, 1:3] = num_scaled_train
+X_test_transformed.iloc[:, 1:3] = num_scaled_test
 
-df_new = pd.concat([flights_data, pd.DataFrame(encoding_sourcecities)], axis=1)
-df_new.rename(columns={
-    0:"source_city1",
-    1:"source_city2",
-    2:"source_city3",
-    3:"source_city4",
-    4:"source_city5"},
-    inplace=True)
-df_new = pd.concat([df_new, pd.DataFrame(encoding_destinationcities)], axis=1)
-df_new.rename(columns={
-    0:"destination_city1",
-    1:"destination_city2",
-    2:"destination_city3",
-    3:"destination_city4",
-    4:"destination_city5"},
-    inplace=True)
+scaler_target = StandardScaler()
 
-df_new.drop(columns=["source_city","destination_city"],inplace=True)
-
-flights_airlines = flights_data[['airline']]
-encoding_airlines = Encoder.fit_transform(flights_airlines)
-df_new = pd.concat([df_new, pd.DataFrame(encoding_airlines)], axis=1)
-df_new.rename(columns={
-    0:"airlines1",
-    1:"airlines2",
-    2:"airlines3",
-    3:"airlines4",
-    4:"airlines5"},
-    inplace=True)
-
-df_new.drop(columns=["airline","flight"],inplace=True)
-
-encoding_departure = Encoder.fit_transform(flights_departuretime)
-encoding_arrival=Encoder.transform(flights_arrivaltime)
-
-df_new = pd.concat([df_new, pd.DataFrame(encoding_departure)], axis=1)
-df_new.rename(columns={
-    0:"departure1",
-    1:"departure2",
-    2:"departure3",
-    3:"departure4",
-    4:"departure5"},
-    inplace=True)
-
-df_new = pd.concat([df_new, pd.DataFrame(encoding_arrival)], axis=1)
-df_new.rename(columns={
-    0:"arrival1",
-    1:"arrival2",
-    2:"arrival3",
-    3:"arrival4",
-    4:"arrival5"},
-    inplace=True)
-df_new.drop(columns=["departure_time","arrival_time"],inplace=True)
-df_new = df_new.replace({'Economy':0,'Business':1})
-
-del encoding_airlines, encoding_destinationcities, encoding_sourcecities,flights_destinationcity,flights_sourcecity,flights_airlines
-del flights_departuretime,flights_arrivaltime,encoding_arrival,encoding_departure
-
-scaler = MinMaxScaler(feature_range=(0,1))
-
+y_train['price'] = scaler_target.fit_transform(y_train[['price']].values)
+y_test['price'] = scaler_target.transform(y_test[['price']].values)
