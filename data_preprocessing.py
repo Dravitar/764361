@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 
 flights_data = pd.read_csv("flight_dataset.csv")
 flights_data.drop(columns=["Unnamed: 0"],inplace=True)
@@ -22,15 +23,16 @@ sns.histplot(data=flights_data['price'])
 
 flights_data.nunique()
 
-time_categories = {"Early_Morning":0, "Morning":1, "Afternoon":2, "Evening":3, "Night":4, "Late_Night":5}
 
-flights_data = flights_data.replace(time_categories)
 
 flights_data['stops'] = flights_data['stops'].replace({'zero': 0, 'one': 1, 'two_or_more': 2})
 
+flights_departuretime = flights_data[["departure_time"]]
+flights_arrivaltime = flights_data[["arrival_time"]]
 flights_sourcecity = flights_data[["source_city"]]
 flights_destinationcity = flights_data[["destination_city"]]
-from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
+
+
 Encoder = OneHotEncoder(drop='first',sparse=False)
 
 encoding_sourcecities = Encoder.fit_transform(flights_sourcecity)
@@ -67,9 +69,32 @@ df_new.rename(columns={
     inplace=True)
 
 df_new.drop(columns=["airline","flight"],inplace=True)
+
+encoding_departure = Encoder.fit_transform(flights_departuretime)
+encoding_arrival=Encoder.transform(flights_arrivaltime)
+
+df_new = pd.concat([df_new, pd.DataFrame(encoding_departure)], axis=1)
+df_new.rename(columns={
+    0:"departure1",
+    1:"departure2",
+    2:"departure3",
+    3:"departure4",
+    4:"departure5"},
+    inplace=True)
+
+df_new = pd.concat([df_new, pd.DataFrame(encoding_arrival)], axis=1)
+df_new.rename(columns={
+    0:"arrival1",
+    1:"arrival2",
+    2:"arrival3",
+    3:"arrival4",
+    4:"arrival5"},
+    inplace=True)
+df_new.drop(columns=["departure_time","arrival_time"],inplace=True)
 df_new = df_new.replace({'Economy':0,'Business':1})
 
 del encoding_airlines, encoding_destinationcities, encoding_sourcecities,flights_destinationcity,flights_sourcecity,flights_airlines
+del flights_departuretime,flights_arrivaltime,encoding_arrival,encoding_departure
 
 scaler = MinMaxScaler(feature_range=(0,1))
 
