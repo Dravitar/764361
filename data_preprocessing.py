@@ -23,7 +23,7 @@ sns.histplot(data=flights_data['duration'])
 sns.histplot(data=flights_data['days_left'])
 sns.histplot(data=flights_data['price'])
 
-categorical_cols = ['airline','source_city','departure_time','stops','arrival_time','destination_city','class']
+categorical_cols = ['airline','source_city','departure_time','arrival_time','destination_city','class']
 for col in categorical_cols:
     print(f"\n\n {col} \n\n",flights_data[f"{col}"].value_counts())
 
