@@ -57,3 +57,64 @@ scaler_target = StandardScaler()
 
 y_train['price'] = scaler_target.fit_transform(y_train[['price']].values)
 y_test['price'] = scaler_target.transform(y_test[['price']].values)
+
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, r2_score
+
+# Set up a regression model
+lin_reg = LinearRegression()
+
+# Fit the model on the training data
+lin_reg.fit(X_train_transformed, y_train)
+
+# Use the trained model to make predictions on the test set
+y_pred = lin_reg.predict(X_test_transformed)
+
+# Compute the mean absolute error and R-squared on the test set
+mae = mean_absolute_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print("Mean absolute error:", mae)
+print("R-squared:", r2)
+
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.tree import DecisionTreeRegressor
+
+# Set up a regression model
+tree_reg = DecisionTreeRegressor()
+
+# Fit the model on the training data
+tree_reg.fit(X_train_transformed, y_train)
+
+# Use the trained model to make predictions on the test set
+y_pred = tree_reg.predict(X_test_transformed)
+
+# Compute the mean absolute error and R-squared on the test set
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print("Mean absolute error:", mae)
+print("Mean squared root error:", np.sqrt(mse))
+print("R-squared:", r2)
+
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.linear_model import Lasso
+
+# Set up a regression model
+lasso = Lasso(alpha=33)
+
+# Fit the model on the training data
+lasso.fit(X_train_transformed, y_train)
+
+# Use the trained model to make predictions on the test set
+y_pred = lasso.predict(X_test_transformed)
+
+# Compute the mean absolute error and R-squared on the test set
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print("Mean absolute error:", mae)
+print("Mean squared root error:", np.sqrt(mse))
+print("R-squared:", r2)
