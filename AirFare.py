@@ -159,9 +159,12 @@ print("R-squared:", r2)
 ### SVR ###
 from sklearn.svm import SVR
 
+y_train_numpy = y_train.to_numpy()
+y_train_numpy = np.ravel(y_train_numpy)
+
 # Create a Support Vector Regression model and fit it on the training data
-svr = SVR(kernel='rbf', C=100, gamma=0.1)
-svr.fit(X_train_transformed, y_train)
+svr = SVR(kernel='rbf', C=1, gamma=0.1)
+svr.fit(X_train_transformed, y_train_numpy)
 
 y_pred = svr.predict(X_test_transformed)
 
@@ -173,3 +176,23 @@ r2 = r2_score(y_test, y_pred)
 print("Mean absolute error:", mae)
 print("Mean squared root error:", np.sqrt(mse))
 print("R-squared:", r2)
+
+from sklearn.model_selection import GridSearchCV
+
+# Define the parameter grid
+param_grid = {'C': [0.1, 1, 10, 100],
+              'epsilon': [0.01, 0.1, 1, 10],
+              'gamma': [0.001, 0.01, 0.1, 1, 'scale', 'auto']}
+
+# Define the SVR model
+svr = SVR(kernel = 'rbf')
+
+# Define the grid search object
+grid_search = GridSearchCV(svr, param_grid, cv=5, scoring='neg_mean_squared_error')
+
+# Fit the grid search object to the data
+grid_search.fit(X_train_transformed, y_train_numpy)
+
+# Print the best parameters and score
+print("Best parameters: {}".format(grid_search.best_params_))
+print("Best cross-validation score: {:.2f}".format(np.sqrt(-grid_search.best_score_)))
