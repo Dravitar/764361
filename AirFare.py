@@ -26,9 +26,9 @@ sns.histplot(data=flights_data['price'])
 
 
 # now let's take a look at the categorical values to know what is the best way to encode them
-categorical_cols = ['airline','source_city','departure_time','arrival_time','destination_city','class']
+categorical_cols = ['airline','source_city','departure_time','arrival_time','destination_city','class','stops']
 for col in categorical_cols:
-    print(f"\n\n {col} \n\n",flights_data[f"{col}"].value_counts())
+    print(f"\n\n{col} \n\n",flights_data[f"{col}"].value_counts())
 
 flights_data.nunique()
 
@@ -44,8 +44,8 @@ stratify_cols = ['airline','departure_time','stops','class' ]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=flights_data[stratify_cols],random_state=42)
 
 #we transform the categorical variables into dummy variables
-X_train_transformed = pd.get_dummies(X_train, columns = categorical_cols,drop_first=True)
-X_test_transformed = pd.get_dummies(X_test, columns = categorical_cols,drop_first=True)
+X_train_transformed = pd.get_dummies(X_train, columns = categorical_cols[0:6],drop_first=True)
+X_test_transformed = pd.get_dummies(X_test, columns = categorical_cols[0:6],drop_first=True)
 
 X_train_transformed['stops'] = X_train_transformed['stops'].replace({'zero':0,'one':1,'two_or_more':2})
 X_test_transformed['stops'] = X_test_transformed['stops'].replace({'zero':0,'one':1,'two_or_more':2})
