@@ -7,18 +7,36 @@ from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-
+# uploading the data
 flights_data = pd.read_csv("flight_dataset.csv")
 flights_data.drop(columns=["Unnamed: 0"],inplace=True)
 
+# checking for null and duplicated values
 flights_data.isna().sum()
 flights_data.duplicated().sum()
 
+# creating the correlation matrix
 corr_df = flights_data.corr()
 fig, ax = plt.subplots()
 sns.heatmap(corr_df, annot=True, cmap=sns.color_palette('ch:s=.25,rot=-.25', as_cmap=True), ax=ax)
 plt.savefig("Flight corr.png", dpi=300, bbox_inches='tight')
 plt.show()
+
+# now let's consider the distribution of our target variable
+flights_data['price']=flights_data['price'].astype(float)
+
+fig, ax = plt.subplots()
+sns.histplot(data=flights_data, x="price", palette="Set1", ax=ax)
+plt.xlabel('Price')
+fig.tight_layout()
+plt.savefig("Target distribution.png", dpi=300, bbox_inches='tight')
+fig.show()
+
+    # we can calculate the imbalance:
+low_p = flights_data['price'].loc[flights_data['price'] < 30000]
+high_p = flights_data['price'].loc[flights_data['price'] >= 30000]
+c_ratio = high_p.count()/low_p.count()
+print("Minority class ratio:", c_ratio)
 
 sns.histplot(data=flights_data['duration'])
 sns.histplot(data=flights_data['days_left'])
@@ -35,13 +53,29 @@ flights_data.nunique()
 #the flight number column is not relevant for our analysis, so we drop it
 flights_data.drop('flight',axis=1,inplace=True)
 
-#now we separate our dependent variable (flight) from the rest
-X = flights_data.drop('price',axis=1)
-y = flights_data[['price']]
 
-#here we split between training set and test set, picking 20% as our test set size
-stratify_cols = ['airline','departure_time','stops','class' ]
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=flights_data[stratify_cols],random_state=42)
+target = 'price'
+features = ['airline', 'source_city', 'departure_time', 'stops', 'arrival_time',
+       'destination_city', 'class', 'duration', 'days_left','bins']
+
+# Calculate the cut values for the stratification bins
+percentiles = [25, 50, 75]
+cut_values = flights_data[target].quantile([p/100 for p in percentiles])
+
+# Create a new column with the bin labels
+flights_data['bins'] = pd.cut(flights_data[target], bins=[-float("inf")] + list(cut_values) + [float("inf")])
+
+# Split the data into training and testing sets, stratified by the bins
+X_train, X_test, y_train, y_test = train_test_split(flights_data[features], flights_data[target], test_size=0.2, stratify=flights_data['bins'], random_state=42)
+
+y_test = pd.DataFrame(y_test)
+y_train = pd.DataFrame(y_train)
+
+# Drop the bin column
+X_train.drop('bins',axis=1,inplace=True)
+X_test.drop('bins',axis=1,inplace=True)
+
+
 
 #we transform the categorical variables into dummy variables
 X_train_transformed = pd.get_dummies(X_train, columns = categorical_cols[0:6],drop_first=True)
@@ -49,6 +83,24 @@ X_test_transformed = pd.get_dummies(X_test, columns = categorical_cols[0:6],drop
 
 X_train_transformed['stops'] = X_train_transformed['stops'].replace({'zero':0,'one':1,'two_or_more':2})
 X_test_transformed['stops'] = X_test_transformed['stops'].replace({'zero':0,'one':1,'two_or_more':2})
+
+#creating the box plots for the categorical variables
+df=X_train_transformed.drop(columns=(['duration','days_left']))
+sns.boxplot(data=df)
+
+for col in categorical_cols:
+    counts = pd.DataFrame(flights_data[col].value_counts())
+    counts.reset_index(inplace=True)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax = sns.barplot(x=counts["index"], y=counts[col], data=counts, palette="bright",)
+    # set the title and axis labels for the plot
+    plt.xlabel(col)
+    plt.ylabel('Frequency')
+    # show the plot
+    plt.show()
+    ax.figure.savefig(f"{col}.png",dpi=300)
+
+
 
 #then we scale the numerical variables
 num_cols = ['duration','days_left']
@@ -115,24 +167,41 @@ print("Mean squared root error:", np.sqrt(mse))
 print("R-squared:", r2)
 
 
-'''
-### Lasso ###
-from sklearn.linear_model import Lasso
+### RANDOM FOREST ###
+from sklearn.ensemble import RandomForestRegressor
 
-# Set up a regression model
-lasso = Lasso(alpha=33)
+# Create a random forest regressor
+rf = RandomForestRegressor()
 
 # Fit the model on the training data
-lasso.fit(X_train_transformed, y_train)
+rf.fit(X_train_transformed, y_train)
 
-# Use the trained model to make predictions on the test set
-y_pred = lasso.predict(X_test_transformed)
+# Predict the target values for the test data
+y_pred = rf.predict(X_test_transformed)
 
 # Compute the mean absolute error and R-squared on the test set
 mae = mean_absolute_error(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 
+print("Mean absolute error:", mae)
+print("Mean squared root error:", np.sqrt(mse))
+print("R-squared:", r2)
+
+
+'''
+### Lasso ###
+from sklearn.linear_model import Lasso
+# Set up a regression model
+lasso = Lasso(alpha=33)
+# Fit the model on the training data
+lasso.fit(X_train_transformed, y_train)
+# Use the trained model to make predictions on the test set
+y_pred = lasso.predict(X_test_transformed)
+# Compute the mean absolute error and R-squared on the test set
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
 print("Mean absolute error:", mae)
 print("Mean squared root error:", np.sqrt(mse))
 print("R-squared:", r2)
