@@ -19,21 +19,21 @@ As you can see from *Fig 1*, the numerical variable most related to our target v
 
 We then moved on to analyzing the distribution of the target variables itself, as shown from *Fig 2*.
 
-
+*Fig 2*: Price distribution| 
+:-------------------------:|
+![](https://github.com/Dravitar/764361/blob/main/Target%20distribution.png)  |
 
 From this, we were able to identify two important characteristics of our data. To begin with, there is a sharp division between the price of tickets in economy class and business class. This is justified as higher classes include more benefits and require more expensive tickets. Moreover, we can clearly see from the image how the Price variable is not normally distributed. This makes the dataset imbalanced, and increases the probability of business class tickets being underepresented in our model. Therfore, we will have to take this into consideration before running our models.
+
+We then moved on to visualizing the distribution of the other numerical variables.
 
 *Fig 3*: Distribution of days left data|*Fig 4*: Distribution of flight duration data
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/pics/daysleft_distr.png)  |  ![](https://github.com/Dravitar/764361/blob/main/pics/duration_distr.png)
 
-These graphs confirm what we had already seen in the correlation matrix. 
+These graphs confirm what we had already seen in the correlation matrix. In particular, we see a strong resemblance between the Duration and the Price variable. This can be deriving from a variety of factors. Flights that have higher duration times are going to have to cover higher costs, that are going to show up in the form of higher prices for the customers. In fact, flights with higher duration - and hence longer routes - require more fuel for the plane. Moreover, longer flights require higher wages for the entire crew. A final aspect to consider is the need for refreshments for passengers spending more hours on the plane. All these are costs that increase the final price of the flight.
 
-  2. target variable distribution:
-      not normally distributed (we'll deal with it later)
-      clear distinction between classes
-  4. numerical variables distribution
-      duration confirmed to be the most correlated to price: fuel, food, more hours to pay the crew
+
   6. relationship between price and: days left , duration
   8. range of price values for each of the class labels (box plots)
   9. other box plots maybe???? if we can find something good to comment for them
