@@ -23,7 +23,7 @@ We then moved on to analyzing the distribution of the target variables itself, a
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/images/Target%20distribution.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/Class_boxplots.png)
 
-From this, we were able to identify two important characteristics of our data. To begin with, there is a sharp division between the price of tickets in economy class and business class. This is justified as higher classes include more benefits and require more expensive tickets. Moreover, we can clearly see from the image how the Price variable is not normally distributed. This makes the dataset imbalanced, and increases the probability of business class tickets being underepresented in our model. Therfore, we will have to take this into consideration before running our models.t riables.
+From this, we were able to identify two important characteristics of our data. To begin with, there is a sharp division between the price of tickets in economy class and business class. This is justified as higher classes include more benefits and require more expensive tickets. Moreover, we can clearly see from the image how the Price variable is not normally distributed. This makes the dataset imbalanced, and increases the probability of business class tickets being underepresented in our model. Therfore, we will have to take this into consideration before running our models.
 
 *Fig 4*: Distribution of days left data|*Fig 5*: Distribution of flight duration data
 :-------------------------:|:-------------------------:
@@ -38,9 +38,9 @@ We proceeded to visualize the relationship between our target variable and our n
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/images/price_daysleft.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/price_duration.png)
 
-We can firstly identify the negative reletionship between the price of the ticket and the number of days left before the flight. This can easily be attributed to the increase in demand for the ticket, and lack of supply for flights. In fact, as time passes there is going to be less expty seats on the flights. It is also interesting to note the sharp decrease in price right as the number of days left until the flight approaches zero. This might be due to the fact that booking a flight the day of the departure has a number of risks so high that a lower price is needed to maintain the exchange balanced.
+We can firstly identify the negative reletionship between the price of the ticket and the number of days left before the flight. This can easily be attributed to the increase in demand for the ticket, and lack of supply for flights. In fact, as time passes there is going to be less empty seats on the flights. It is also interesting to note the sharp decrease in price right as the number of days left until the flight approaches zero. This might be due to the fact that booking a flight the day of the departure has a number of risks so high that a lower price is needed to maintain the exchange balanced.
 
-Moreover, we can see that the price initually increases for flights lasting up until 20 hours. This can be deriving from a variety of factors. Flights that have higher duration times are going to have to cover higher costs, that are going to show up in the form of higher prices for the customers. In fact, flights with higher duration - and hence longer routes - require more fuel for the plane. Moreover, longer flights require higher wages for the entire crew. A final aspect to consider is the need for refreshments for passengers spending more hours on the plane. All these are costs that increase the final price of the flight. However, the price starts decreasing after the duration value surpasses 20 hours (although it retains a higher variance). This can be explained by the fact that flights lasting too long are not convenient and not appealing enough to customers, who are more likely to choose other modes of transport, or closer destinations.
+Moreover, we can see that the price initially increases for flights lasting up until 20 hours. This can be deriving from a variety of factors. Flights that have higher duration times are going to have to cover higher costs, that are going to show up in the form of higher prices for the customers. In fact, flights with higher duration - and hence longer routes - require more fuel for the plane. Moreover, longer flights require higher wages for the entire crew. A final aspect to consider is the need for refreshments for passengers spending more hours on the plane. All these are costs that increase the final price of the flight. However, the price starts decreasing after the duration value surpasses 20 hours (although it retains a higher variance). This can be explained by the fact that flights lasting too long are not convenient and not appealing enough to customers, who are more likely to choose other modes of transport, or closer destinations.
 
 Finally, we decided to look more into the categorical variables at our disposal. We did so by producing a number of box plots.
 
@@ -48,7 +48,7 @@ Finally, we decided to look more into the categorical variables at our disposal.
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/images/airlines_boxplots.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/stops_boxplots.png)
 
-*Fig 8* once again highlighted how economy class tickets are significantly lower than business class tickets, as we had already noted from *Fig 2* and *Fig 3*. However, thanks to this boxplot we were also able to see that Vistara e Air India are the only airlines with business class tickets available. Instead, *Fig 9* allows us to understand the range in price for flights with different amounts of stops. Flights with one stop have a much higher price range than flights with zero, or more than two stops. Despite this, flights with zero and two or more stops have a larger number of outliers.
+*Fig 8* once again highlighted how economy class tickets are significantly lower than business class tickets, as we had already noted from *Fig 2* and *Fig 3*. However, thanks to this boxplot we were also able to see that Vistara and Air India are the only airlines with business class tickets available. Instead, *Fig 9* allows us to understand the range in price for flights with different amounts of stops. Flights with one stop have a much higher price range than flights with zero, or more than two stops. Despite this, flights with zero and two or more stops have a larger number of outliers.
 
 *Fig 10*: Range of price values for each route|*Fig 11*: Range of price values for departure and arrival time
 :-------------------------:|:-------------------------:
@@ -59,30 +59,16 @@ We then created a box plot showing the price on the y axis, the city of departur
 
 ## Methods
 In order to meet the goals of our project, we tested and evaluated different regression algorithms. However, before doing that we took some measures to help with the imbalance in our target variable. In particular, we decided to do a stratified sampling on our data, splitting the "bins" into batches each containing 20% of the total sample. This helped us better divide the data into training and test sets, providing a more robust model. Stratified sampling allowed us to avoid underrepresenting or overrpepreseting outliers, while still maintaining the original distribution of our data, natural for the airfare market.
-  We then proceeded to test different algorithms, namely Linear Regression, Decision Tree, Random Forest, KNN, and SVR. In order to achieve this, we imported the following libraries into our Jupyter notebook:
-* import numpy as np
-* import pandas as pd
-* import matplotlib.pyplot as plt
-* import seaborn as sns
-* from sklearn.preprocessing import StandardScaler
-* from sklearn.compose import ColumnTransformer
-* from sklearn.model_selection import train_test_split
-* from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-* from sklearn.linear_model import LinearRegression
-* from sklearn.tree import DecisionTreeRegressor
-* from sklearn.ensemble import RandomForestRegressor
-* from sklearn.neighbors import KNeighborsRegressor
-* from sklearn.svm import SVR
-* from sklearn.model_selection import RandomizedSearchCV
-* from sklearn.model_selection import GridSearchCV
+
+  We then proceeded to test different algorithms, namely Linear Regression, Decision Tree, Random Forest, KNN, and SVR. In order to achieve this, we imported a number of libraries into our Jupyter notebook, including numpy, pandas, matplotlib, seaborn, and a number of regression models from sklearn. Users who wish to utilize our methodologies will need to ensure these libraries are installed on their device.
   
 Another aspect to note is that we decided to discard SVR throughout the testing process. This is due to the extremely long run time and lower performance metrics compared to the other algorithms tried.
 
-After testing all the algorithms, we decided the best performing one was Random Forest (we will explain more about this decision in the following paragraph). To conclude the model training, we proceeded to tune our hyperparameters. We did this by testing both a randomized search on hyperparameters, and grid search. After testing different options, we selected the following parameters for the final model: "max_depth": 30, "min_samples_leaf": 8, "min_samples_split": 15, "n_estimators": 300.
+After testing all the algorithms, we decided the best performing one was Random Forest (we will explain more about this decision in the following section). To conclude the model training, we proceeded to tune our hyperparameters. We did this by testing both a randomized search on hyperparameters, and grid search. After testing different options, we selected the following parameters for the final model: "max_depth": 30, "min_samples_leaf": 8, "min_samples_split": 15, "n_estimators": 300.
 
 
 ## Experimental Design
-After running the different algorithms, we elected Random Forest as the best performing one. This decision was supported by a variety of reasons. To begin with, we compared different evaluation metrics (*Fig 12*).
+After running the different algorithms, we selected Random Forest as the best performing one. This decision was supported by a variety of reasons, summarized by several different evaluation metrics (*Fig 12*).
 
 We considered the Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and R squared. The R squared produced high results for all models, but due to the high number of variables (deriving from encoding the categorical variables) we considered the MAE and RMSE to be more reliable metrics. Regardless of the choice, it is clear from *Fig 9* that the best performing algorithm is Random Forest.
 We also compared the metrics after tuning the hyperparameters. Even though the MAE of the Random Forest Regressor model with default parameters is lower, the minimum samples in leaf nodes is 1. This means the model is susceptible to noise and the max depth is much higher. This could lead to overfitting and may cause problems with new data. The RMSE and the R-squared values are slighly improved. Either way, in both cases the models are robust. Therefore, in our final choice we prioritized having a better generelazition.
