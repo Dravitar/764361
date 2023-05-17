@@ -17,25 +17,29 @@ Arianna Bucca (764361), Angela Jane Salazar Hernandez (766411), Nathan Alexander
 
 As you can see from *Fig 1*, the numerical variable most related to our target variable Price is the one concerning the duration of the flight. In general, however, the values on the correlation matrix are not very strong.
 
-We then moved on to analyzing the distribution of the target variables itself, as shown from *Fig 2*.
+We then moved on to analyzing the distribution of the target variables itself, as shown in *Fig 2* and *Fig 3*.
 
-*Fig 2*: Price distribution| 
-:-------------------------:|
-![](https://github.com/Dravitar/764361/blob/main/Target%20distribution.png)  |
+*Fig 2*: Price distribution - Histogram|*Fig 5*: Price distribution - Boxplot
+:-------------------------:|:-------------------------:
+![](https://github.com/Dravitar/764361/blob/main/Target%20distribution.png)  |  ![](https://github.com/Dravitar/764361/blob/main/Class_boxplots.png)
 
 From this, we were able to identify two important characteristics of our data. To begin with, there is a sharp division between the price of tickets in economy class and business class. This is justified as higher classes include more benefits and require more expensive tickets. Moreover, we can clearly see from the image how the Price variable is not normally distributed. This makes the dataset imbalanced, and increases the probability of business class tickets being underepresented in our model. Therfore, we will have to take this into consideration before running our models.
 
 We then moved on to visualizing the distribution of the other numerical variables.
 
-*Fig 3*: Distribution of days left data|*Fig 4*: Distribution of flight duration data
+*Fig 4*: Distribution of days left data|*Fig 5*: Distribution of flight duration data
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/pics/daysleft_distr.png)  |  ![](https://github.com/Dravitar/764361/blob/main/pics/duration_distr.png)
 
 These graphs confirm what we had already seen in the correlation matrix. In particular, we see a strong resemblance between the Duration and the Price variable. This can be deriving from a variety of factors. Flights that have higher duration times are going to have to cover higher costs, that are going to show up in the form of higher prices for the customers. In fact, flights with higher duration - and hence longer routes - require more fuel for the plane. Moreover, longer flights require higher wages for the entire crew. A final aspect to consider is the need for refreshments for passengers spending more hours on the plane. All these are costs that increase the final price of the flight.
 
-We proceeded to visualize the relationship between our target variable and our numerical variables (*Fig 5* and *Fig 6*). We can identify the negative reletionship between the price of the ticket and the number of days left before the flight. This can easily be attributed to the increase in demand for the ticket, and lack of supply for flights (we can imagine that as time passes, there is going to be less and less expty seats on the flights). Moreover, we can see that the 
+We proceeded to visualize the relationship between our target variable and our numerical variables (*Fig 6* and *Fig 7*).
 
-this might be attributed to an increasing return to scale situation. In fact, the longer the flights, the higher the number of passengers.
+*Fig 6*: Price according to the days left until the flight|*Fig 7*: Price according to the duration of the flight
+:-------------------------:|:-------------------------:
+![](https://github.com/Dravitar/764361/blob/main/pics/price_daysleft.png)  |  ![](https://github.com/Dravitar/764361/blob/main/pics/price_duration.png)
+
+We can identify the negative reletionship between the price of the ticket and the number of days left before the flight. This can easily be attributed to the increase in demand for the ticket, and lack of supply for flights (we can imagine that as time passes, there is going to be less and less expty seats on the flights). Moreover, we can see that the price initually increases for flights lasting up until 25 hours. Afterwards, the price starts decreasing (although it retains a higher variance). This can be explained by the fact that flights lasting too long are not convenient and not appealing enough to customers, who are more likely to choose other modes of transport, or closer destinations.
 
 
   6. relationship between price and: days left , duration
