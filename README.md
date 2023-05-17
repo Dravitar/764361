@@ -19,7 +19,7 @@ As you can see from *Fig 1*, the numerical variable most related to our target v
 
 We then moved on to analyzing the distribution of the target variables itself, as shown in *Fig 2* and *Fig 3*.
 
-*Fig 2*: Price distribution - Histogram|*Fig 5*: Price distribution - Boxplot
+*Fig 2*: Price distribution - Histogram|*Fig 3*: Price distribution - Boxplot
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/images/Target%20distribution.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/Class_boxplots.png)
 
@@ -44,9 +44,17 @@ Moreover, we can see that the price initually increases for flights lasting up u
 
 Finally, we decided to look more into the categorical variables at our disposal. We did so by producing a number of box plots.
 
-*Fig 8*: Price according to the days left until the flight|*Fig 9*: Price according to the duration of the flight
+*Fig 8*: Range of price values for each airline|*Fig 9*: Range of price values for the number of stops
 :-------------------------:|:-------------------------:
-![](https://github.com/Dravitar/764361/blob/main/images/price_daysleft.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/price_duration.png)
+![](https://github.com/Dravitar/764361/blob/main/images/airlines_boxplots.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/stops_boxplots.png)
+
+*Fig 8* once again highlighted how economy class tickets are significantly lower than business class tickets, as we had already noted from *Fig 2* and *Fig 3*. However, thanks to this boxplot we were also able to see that Vistara e Air India are the only airlines with business class tickets available.
+
+
+
+*Fig 10*: Range of price values for each route|*Fig 11*: Range of price values for departure and arrival time
+:-------------------------:|:-------------------------:
+![](https://github.com/Dravitar/764361/blob/main/images/price_route_boxplots.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/price_time_boxplots.png)
   
 ## Methods
 In order to meet the goals of our project, we tested and evaluated different regression algorithms. However, before doing that we took some measures to help with the imbalance in our target variable. In particular, we decided to do a stratified sampling on our data, splitting the "bins" into batches each containing 20% of the total sample. This helped us better divide the data into training and test sets, providing a more robust model. Stratified sampling allowed us to avoid underrepresenting or overrpepreseting outliers, while still maintaining the original distribution of our data, natural for the airfare market.
