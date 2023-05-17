@@ -44,10 +44,27 @@ Arianna Bucca (764361), Angela Jane Salazar Hernandez (766411), Nathan Alexander
   
 ## Methods
   In order to meet the goals of our project, we tested and evaluated different regression algorithms. However, before doing that we took some measures to help with the imbalance in our target variable. In particular, we decided to do a stratified sampling on our data, splitting the "bins" into batches each containing 20% of the total sample. This helped us better divide the data into training and test sets, providing a more robust model. Stratified sampling allowed us to avoid underrepresenting or overrpepreseting outliers, while still maintaining the original distribution of our data, natural for the airfare market.
-  We then proceeded to test different
-
+  We then proceeded to test different algorithms, namely Linear Regression, Decision Tree, Random Forest, KNN, and SVR. In order to achieve this, we imported the following libraries into our Jupyter notebook:
+* import numpy as np
+* import pandas as pd
+* import matplotlib.pyplot as plt
+* import seaborn as sns
+* from sklearn.preprocessing import StandardScaler
+* from sklearn.compose import ColumnTransformer
+* from sklearn.model_selection import train_test_split
+* from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+* from sklearn.linear_model import LinearRegression
+* from sklearn.tree import DecisionTreeRegressor
+* from sklearn.ensemble import RandomForestRegressor
+* from sklearn.neighbors import KNeighborsRegressor
+* from sklearn.svm import SVR
+* from sklearn.model_selection import RandomizedSearchCV
+* from sklearn.model_selection import GridSearchCV
   
-Describe your proposed ideas (e.g., features, algorithm(s), training overview, design choices, etc.) and your environment so that:
+  After testing all the algorithms, we decided the best performing one was Random Forest (we will explain more about this decision in the following paragraph). To conclude the model training, we proceeded to tune our hyperparameters. We did this by testing both a randomized search on hyperparameters, and grid search. The parameters chosen for the final model are the following: "max_depth": 30, "min_samples_leaf": 8, "min_samples_split": 15, "n_estimators": 300.
+Even though the MAE of the Random Forest Regressor model with default parameters is lower, the minimum samples in leaf nodes is 1. This means the model is susceptible to noise and the max depth is much higher. This could lead to overfitting and may cause problems with new data. The RMSE and the R-squared values are slighly improved. Either way, in both cases the models are robust. Therefore, in our final choice we prioritized having a better generelazition.
+  
+Describe your proposed ideas (e.g., features, algorithm(s), training overview, design choices, etc.) and your envtironment so that:
 i. A reader can understand why you made your design decisions and the reasons behind any other choice related to the project
 ii. A reader should be able to recreate your environment (e.g., conda list, conda env export, etc.)
 iii. It may help to include a figure illustrating your ideas, e.g., a flowchart illustrating the steps in your machine learning system(s)
