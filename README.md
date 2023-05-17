@@ -10,14 +10,33 @@ Arianna Bucca (764361), Angela Jane Salazar Hernandez (766411), Nathan Alexander
   
 ## Exploratory Data Analysis
   After making sure the dataset did not have any null or duplicated variables, we moved on to analyzing the correlation matrix.
-  ![Alt text](https://github.com/Dravitar/764361/blob/main/Flight%20corr.png)
+  
+*Fig 1*: Correlation Matrix| 
+:-------------------------:|
+![](https://github.com/Dravitar/764361/blob/main/Flight%20corr.png)  |
+
+As you can see from *Fig 1*, the numerical variable most related to our target variable Price is the one concerning the duration of the flight. In general, however, the values on the correlation matrix are not very strong.
+
+We then moved on to analyzing the distribution of the target variables itself, as shown from *Fig 2*.
 
 
-  2. numerical variables distribution
-  4. relationship between price and: days left , duration
-  5. target variable distribution
-  6. range of price values for each of the class labels (box plots)
-  7. other box plots maybe???? if we can find something good to comment for them
+
+From this, we were able to identify two important characteristics of our data. To begin with, there is a sharp division between the price of tickets in economy class and business class. This is justified as higher classes include more benefits and require more expensive tickets. Moreover, we can clearly see from the image how the Price variable is not normally distributed. This makes the dataset imbalanced, and increases the probability of business class tickets being underepresented in our model. Therfore, we will have to take this into consideration before running our models.
+
+*Fig 3*: Distribution of days left data|*Fig 4*: Distribution of flight duration data
+:-------------------------:|:-------------------------:
+![](https://github.com/Dravitar/764361/blob/main/pics/daysleft_distr.png)  |  ![](https://github.com/Dravitar/764361/blob/main/pics/duration_distr.png)
+
+These graphs confirm what we had already seen in the correlation matrix. 
+
+  2. target variable distribution:
+      not normally distributed (we'll deal with it later)
+      clear distinction between classes
+  4. numerical variables distribution
+      duration confirmed to be the most correlated to price: fuel, food, more hours to pay the crew
+  6. relationship between price and: days left , duration
+  8. range of price values for each of the class labels (box plots)
+  9. other box plots maybe???? if we can find something good to comment for them
 
   
 # NEXT TO WRITE: 
