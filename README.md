@@ -41,7 +41,7 @@ We proceeded to visualize the relationship between our target variable and our n
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/pics/price_daysleft.png)  |  ![](https://github.com/Dravitar/764361/blob/main/pics/price_duration.png)
 
-We can identify the negative reletionship between the price of the ticket and the number of days left before the flight. This can easily be attributed to the increase in demand for the ticket, and lack of supply for flights (we can imagine that as time passes, there is going to be less and less expty seats on the flights). Moreover, we can see that the price initually increases for flights lasting up until 25 hours. Afterwards, the price starts decreasing (although it retains a higher variance). This can be explained by the fact that flights lasting too long are not convenient and not appealing enough to customers, who are more likely to choose other modes of transport, or closer destinations.
+We can identify the negative reletionship between the price of the ticket and the number of days left before the flight. This can easily be attributed to the increase in demand for the ticket, and lack of supply for flights (we can imagine that as time passes, there is going to be less and less expty seats on the flights). Moreover, we can see that the price initually increases for flights lasting up until 20 hours. Afterwards, the price starts decreasing (although it retains a higher variance). This can be explained by the fact that flights lasting too long are not convenient and not appealing enough to customers, who are more likely to choose other modes of transport, or closer destinations.
 
   
 ## Methods
@@ -85,14 +85,17 @@ In addition to the better evaluation metrics, we noted other advantages of Rando
 
 
 ## Results 
-Describe the following:
-i. Main finding(s): report your final results and what you might conclude from your work
-ii. Include at least one placeholder figure and/or table for communicating your findings
-iii. All the figures containing results should be generated from the code.
+After conducting a comprehensive analysis and testing different regression algorithms, we were able to conclude that the Random Forest algorithm outperformed other models in predicting flight prices, demonstrating good generalization and robustness, making it the preferred choice for flight price prediction.
+
+Exploratory Data Analysis revealed several insights into the factors influencing flight prices. Firstly, we observed a positive correlation between the duration of the flight and the price of the ticket. This can be attributed to various cost factors associated with longer flights, such as fuel expenses, crew wages, and passenger amenities. In addition, the prices tend to drop once the duration of the flight surpasses 20 hours. This is likely due to the low convenience and comfortability of traveling for such long times, making these flights less regarded by customers. Understanding these relationships helps explain the variation in prices across different flights.
+
+Furthermore, the analysis highlighted a clear distinction between economy class and business class ticket prices. Business class tickets tend to have significantly higher prices due to additional benefits and services provided. This finding emphasizes the importance of considering ticket class as a significant predictor of flight prices.
+
+Additionally, we examined the relationship between the number of days left until the flight and the ticket price. It was evident that as the departure date approaches, the prices tend to increase. This can be attributed to the higher demand for tickets and limited availability as the flight date draws nearer. Understanding this temporal relationship allows customers to make informed decisions regarding the timing of their bookings.
 
 
 ## Conclusions
-This project aimed to predict flight prices using a provided dataset for the benefit of both customers and airlines. The Random Forest algorithm emerged as the best-performing model, demonstrating its effectiveness in predicting flight prices accurately. The evaluation metrics, including MAE, RMSE, and R-squared, supported this conclusion.
+This project aimed to predict flight prices using a provided dataset for the benefit of both customers and airlines. The Random Forest algorithm emerged as the best-performing model, demonstrating its effectiveness in predicting flight prices accurately. The evaluation metrics - including MAE, RMSE, and R-squared - supported this conclusion.
 The project also highlighted the importance of considering the characteristics of the dataset, such as the imbalanced nature of the price variable and the relationships between different numerical variables. Exploratory data analysis revealed insights into factors influencing flight prices, such as flight duration, days left until the flight, and ticket class.
 
 However, it is important to note that this work may not fully address all questions related to flight price prediction. Further research could explore additional factors influencing prices, such as airline reputation, seasonal variations, and external factors like economic conditions or fuel prices. Additionally, incorporating customer-specific variables, such as travel preferences and loyalty programs, could enhance the accuracy of the predictions.
