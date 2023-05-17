@@ -38,10 +38,15 @@ We proceeded to visualize the relationship between our target variable and our n
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/images/price_daysleft.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/price_duration.png)
 
-We can firstly identify the negative reletionship between the price of the ticket and the number of days left before the flight. This can easily be attributed to the increase in demand for the ticket, and lack of supply for flights. In fact, as time passes there is going to be less expty seats on the flights. It is also interesting to note the sharp decrease in price right as the number of days left until the flight approaches zero. This might be due to the fact that booking a flight the day of has a number of risks so high that a lower price is needed to maintain the exchange balanced.
+We can firstly identify the negative reletionship between the price of the ticket and the number of days left before the flight. This can easily be attributed to the increase in demand for the ticket, and lack of supply for flights. In fact, as time passes there is going to be less expty seats on the flights. It is also interesting to note the sharp decrease in price right as the number of days left until the flight approaches zero. This might be due to the fact that booking a flight the day of the departure has a number of risks so high that a lower price is needed to maintain the exchange balanced.
 
 Moreover, we can see that the price initually increases for flights lasting up until 20 hours. This can be deriving from a variety of factors. Flights that have higher duration times are going to have to cover higher costs, that are going to show up in the form of higher prices for the customers. In fact, flights with higher duration - and hence longer routes - require more fuel for the plane. Moreover, longer flights require higher wages for the entire crew. A final aspect to consider is the need for refreshments for passengers spending more hours on the plane. All these are costs that increase the final price of the flight. However, the price starts decreasing after the duration value surpasses 20 hours (although it retains a higher variance). This can be explained by the fact that flights lasting too long are not convenient and not appealing enough to customers, who are more likely to choose other modes of transport, or closer destinations.
 
+Finally, we decided to look more into the categorical variables at our disposal. We did so by producing a number of box plots.
+
+*Fig 8*: Price according to the days left until the flight|*Fig 9*: Price according to the duration of the flight
+:-------------------------:|:-------------------------:
+![](https://github.com/Dravitar/764361/blob/main/images/price_daysleft.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/price_duration.png)
   
 ## Methods
 In order to meet the goals of our project, we tested and evaluated different regression algorithms. However, before doing that we took some measures to help with the imbalance in our target variable. In particular, we decided to do a stratified sampling on our data, splitting the "bins" into batches each containing 20% of the total sample. This helped us better divide the data into training and test sets, providing a more robust model. Stratified sampling allowed us to avoid underrepresenting or overrpepreseting outliers, while still maintaining the original distribution of our data, natural for the airfare market.
@@ -68,21 +73,21 @@ After testing all the algorithms, we decided the best performing one was Random 
 
 
 ## Experimental Design
-After running the different algorithms, we elected Random Forest as the best performing one. This decision was supported by a variety of reasons. To begin with, we compared different evaluation metrics (*Fig 8*).
+After running the different algorithms, we elected Random Forest as the best performing one. This decision was supported by a variety of reasons. To begin with, we compared different evaluation metrics (*Fig 12*).
 
 We considered the Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and R squared. The R squared produced high results for all models, but due to the high number of variables (deriving from encoding the categorical variables) we considered the MAE and RMSE to be more reliable metrics. Regardless of the choice, it is clear from *Fig 9* that the best performing algorithm is Random Forest.
 We also compared the metrics after tuning the hyperparameters. Even though the MAE of the Random Forest Regressor model with default parameters is lower, the minimum samples in leaf nodes is 1. This means the model is susceptible to noise and the max depth is much higher. This could lead to overfitting and may cause problems with new data. The RMSE and the R-squared values are slighly improved. Either way, in both cases the models are robust. Therefore, in our final choice we prioritized having a better generelazition.
 
-Moreover, we decided to use the Linear Regression model as our baseline. This is a classic model for regression problems, but it is also very simple. 
+Moreover, we decided to use the Linear Regression model as our baseline. This is a classic model for regression problems, but it is also very simple, making it a great baseline to compare our final model to. As expected, the results of our model with Random Forest proved to be much better than the ones of Linear Regression (*Fig 12*)
 
 In addition to the better evaluation metrics, we noted other advantages of Random Forest. In particular, Random Forest is an algorithm able to perform well with a large number of input variables and to identify the most important variables for prediction. Moreover, it is less prone to overfitting than Decision Trees. Finally, the training times for Random Forest are much faster than in other algorithms (namely KNN and SVR). This makes Random Forest a more efficient and beneficial choice.
 
 
 
 ## Results 
-After conducting a comprehensive analysis and testing different regression algorithms, we were able to conclude that the Random Forest algorithm outperformed other models in predicting flight prices, demonstrating good generalization and robustness, making it the preferred choice for flight price prediction. You can see the performances of the different algorithms in *Fig 8* below.
+After conducting a comprehensive analysis and testing different regression algorithms, we were able to conclude that the Random Forest algorithm outperformed other models in predicting flight prices, demonstrating good generalization and robustness, making it the preferred choice for flight price prediction. You can see the performances of the different algorithms in *Fig 12* below.
 
-*Fig 8*: Evaluation Metrics| 
+*Fig 12*: Evaluation Metrics| 
 :-------------------------:|
 ![](https://github.com/Dravitar/764361/blob/main/images/Evaluation%20metrics.png)  |
 
