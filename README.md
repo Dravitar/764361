@@ -50,12 +50,11 @@ Finally, we decided to look more into the categorical variables at our disposal.
 
 *Fig 8* once again highlighted how economy class tickets are significantly lower than business class tickets, as we had already noted from *Fig 2* and *Fig 3*. However, thanks to this boxplot we were also able to see that Vistara e Air India are the only airlines with business class tickets available. Instead, *Fig 9* allows us to understand the range in price for flights with different amounts of stops. Flights with one stop have a much higher price range than flights with zero, or more than two stops. Despite this, flights with zero and two or more stops have a larger number of outliers.
 
-
-
 *Fig 10*: Range of price values for each route|*Fig 11*: Range of price values for departure and arrival time
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/images/price_route_boxplots.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/price_time_boxplots.png)
   
+
 ## Methods
 In order to meet the goals of our project, we tested and evaluated different regression algorithms. However, before doing that we took some measures to help with the imbalance in our target variable. In particular, we decided to do a stratified sampling on our data, splitting the "bins" into batches each containing 20% of the total sample. This helped us better divide the data into training and test sets, providing a more robust model. Stratified sampling allowed us to avoid underrepresenting or overrpepreseting outliers, while still maintaining the original distribution of our data, natural for the airfare market.
   We then proceeded to test different algorithms, namely Linear Regression, Decision Tree, Random Forest, KNN, and SVR. In order to achieve this, we imported the following libraries into our Jupyter notebook:
