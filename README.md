@@ -69,10 +69,6 @@ After testing all the algorithms, we decided the best performing one was Random 
 ## Experimental Design
 After running the different algorithms, we elected Random Forest as the best performing one. This decision was supported by a variety of reasons. To begin with, we compared different evaluation metrics (*Fig 8*).
 
-*Fig 8*: Evaluation Metrics| 
-:-------------------------:|
-![](https://github.com/Dravitar/764361/blob/main/images/Evaluation%20metrics.png)  |
-
 We considered the Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and R squared. The R squared produced high results for all models, but due to the high number of variables (deriving from encoding the categorical variables) we considered the MAE and RMSE to be more reliable metrics. Regardless of the choice, it is clear from *Fig 9* that the best performing algorithm is Random Forest.
 We also compared the metrics after tuning the hyperparameters. Even though the MAE of the Random Forest Regressor model with default parameters is lower, the minimum samples in leaf nodes is 1. This means the model is susceptible to noise and the max depth is much higher. This could lead to overfitting and may cause problems with new data. The RMSE and the R-squared values are slighly improved. Either way, in both cases the models are robust. Therefore, in our final choice we prioritized having a better generelazition.
 
@@ -83,7 +79,11 @@ In addition to the better evaluation metrics, we noted other advantages of Rando
 
 
 ## Results 
-After conducting a comprehensive analysis and testing different regression algorithms, we were able to conclude that the Random Forest algorithm outperformed other models in predicting flight prices, demonstrating good generalization and robustness, making it the preferred choice for flight price prediction.
+After conducting a comprehensive analysis and testing different regression algorithms, we were able to conclude that the Random Forest algorithm outperformed other models in predicting flight prices, demonstrating good generalization and robustness, making it the preferred choice for flight price prediction. You can see the performances of the different algorithms in *Fig 8* below.
+
+*Fig 8*: Evaluation Metrics| 
+:-------------------------:|
+![](https://github.com/Dravitar/764361/blob/main/images/Evaluation%20metrics.png)  |
 
 Exploratory Data Analysis revealed several insights into the factors influencing flight prices. Firstly, we observed a positive correlation between the duration of the flight and the price of the ticket. This can be attributed to various cost factors associated with longer flights, such as fuel expenses, crew wages, and passenger amenities. In addition, the prices tend to drop once the duration of the flight surpasses 20 hours. This is likely due to the low convenience and comfortability of traveling for such long times, making these flights less regarded by customers. Understanding these relationships helps explain the variation in prices across different flights.
 
