@@ -63,8 +63,7 @@ In order to meet the goals of our project, we tested and evaluated different reg
 * from sklearn.model_selection import RandomizedSearchCV
 * from sklearn.model_selection import GridSearchCV
   
-After testing all the algorithms, we decided the best performing one was Random Forest (we will explain more about this decision in the following paragraph). To conclude the model training, we proceeded to tune our hyperparameters. We did this by testing both a randomized search on hyperparameters, and grid search. The parameters chosen for the final model are the following: "max_depth": 30, "min_samples_leaf": 8, "min_samples_split": 15, "n_estimators": 300.
-Even though the MAE of the Random Forest Regressor model with default parameters is lower, the minimum samples in leaf nodes is 1. This means the model is susceptible to noise and the max depth is much higher. This could lead to overfitting and may cause problems with new data. The RMSE and the R-squared values are slighly improved. Either way, in both cases the models are robust. Therefore, in our final choice we prioritized having a better generelazition.
+After testing all the algorithms, we decided the best performing one was Random Forest (we will explain more about this decision in the following paragraph). To conclude the model training, we proceeded to tune our hyperparameters. We did this by testing both a randomized search on hyperparameters, and grid search. After testing different options, we selected the following parameters for the final model: "max_depth": 30, "min_samples_leaf": 8, "min_samples_split": 15, "n_estimators": 300.
 
 Finally, you can observe in *Fig 8* the flowchart illustrating the path in algorithm testing.
 
@@ -74,7 +73,20 @@ Finally, you can observe in *Fig 8* the flowchart illustrating the path in algor
 
 
 ## Experimental Design
+After running the different algorithms, we elected Random Forest as the best performing one. This decision was supported by a variety of reasons. To begin with, we compared different evaluation metrics (*Fig 9*).
 
+*Fig 9*: Evaluation Metrics| 
+:-------------------------:|
+![](https://github.com/Dravitar/764361/blob/main/pics/Evaluation%20metrics.png)  |
+
+We considered the Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and R squared. The R squared produced high results for all models, but due to the high number of variables (deriving from encoding the categorical variables) we considered the MAE and RMSE to be more reliable metrics. Regardless of the choice, it is clear from *Fig 9* that the best performing algorithm is Random Forest.
+We also compared the metrics after tuning the hyperparameters. Even though the MAE of the Random Forest Regressor model with default parameters is lower, the minimum samples in leaf nodes is 1. This means the model is susceptible to noise and the max depth is much higher. This could lead to overfitting and may cause problems with new data. The RMSE and the R-squared values are slighly improved. Either way, in both cases the models are robust. Therefore, in our final choice we prioritized having a better generelazition.
+
+Moreover, we decided to use the Linear Regression model as our baseline. This is a classic model for regression problems, but it is also very simple. 
+
+In addition to the better evaluation metrics, we noted other advantages of Random Forest. 
+
+Finally, the run time for Random Forest is much faster than in other algorithms (namely KNN and SVR). This makes it a more efficient choice.
 ___
 ## Experimental Design
 Describe any experiments conducted to validate the target contribution(s) of the project. Indicate the main purpose of each experiment, in particular:
