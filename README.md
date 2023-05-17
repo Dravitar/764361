@@ -67,12 +67,6 @@ Another aspect to note is that we decided to discard SVR throughout the testing 
 
 After testing all the algorithms, we decided the best performing one was Random Forest (we will explain more about this decision in the following paragraph). To conclude the model training, we proceeded to tune our hyperparameters. We did this by testing both a randomized search on hyperparameters, and grid search. After testing different options, we selected the following parameters for the final model: "max_depth": 30, "min_samples_leaf": 8, "min_samples_split": 15, "n_estimators": 300.
 
-Finally, you can observe in *Fig 8* the flowchart illustrating the path in algorithm testing.
-
-*Fig 8*: Flowchart| 
-:-------------------------:|
-![](LINK)  |
-
 
 ## Experimental Design
 After running the different algorithms, we elected Random Forest as the best performing one. This decision was supported by a variety of reasons. To begin with, we compared different evaluation metrics (*Fig 9*).
