@@ -23,15 +23,14 @@ We then moved on to analyzing the distribution of the target variables itself, a
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/images/Target%20distribution.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/Class_boxplots.png)
 
-From this, we were able to identify two important characteristics of our data. To begin with, there is a sharp division between the price of tickets in economy class and business class. This is justified as higher classes include more benefits and require more expensive tickets. Moreover, we can clearly see from the image how the Price variable is not normally distributed. This makes the dataset imbalanced, and increases the probability of business class tickets being underepresented in our model. Therfore, we will have to take this into consideration before running our models.
-
-We then moved on to visualizing the distribution of the other numerical variables.
+From this, we were able to identify two important characteristics of our data. To begin with, there is a sharp division between the price of tickets in economy class and business class. This is justified as higher classes include more benefits and require more expensive tickets. Moreover, we can clearly see from the image how the Price variable is not normally distributed. This makes the dataset imbalanced, and increases the probability of business class tickets being underepresented in our model. Therfore, we will have to take this into consideration before running our models.t riables.
 
 *Fig 4*: Distribution of days left data|*Fig 5*: Distribution of flight duration data
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/images/daysleft_distr.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/duration_distr.png)
 
-These graphs confirm what we had already seen in the correlation matrix. In particular, we see a strong resemblance between the Duration and the Price variable. This can be deriving from a variety of factors. Flights that have higher duration times are going to have to cover higher costs, that are going to show up in the form of higher prices for the customers. In fact, flights with higher duration - and hence longer routes - require more fuel for the plane. Moreover, longer flights require higher wages for the entire crew. A final aspect to consider is the need for refreshments for passengers spending more hours on the plane. All these are costs that increase the final price of the flight.
+The distributions show us how flights are mostly available when there is still 10 or more days left until departure. On the other hand, the dataset had a decreasing amount of data as the number of days left until the flight approaches 0.
+As for the duration, instead, it is interesting to note that most flights are 1 to 3 hours long. However, it is not uncommon to find a flight of 5 to 15 hours in duration, while flights over 20 hours tend to be rarer.
 
 We proceeded to visualize the relationship between our target variable and our numerical variables (*Fig 6* and *Fig 7*).
 
@@ -39,7 +38,9 @@ We proceeded to visualize the relationship between our target variable and our n
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/images/price_daysleft.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/price_duration.png)
 
-We can identify the negative reletionship between the price of the ticket and the number of days left before the flight. This can easily be attributed to the increase in demand for the ticket, and lack of supply for flights (we can imagine that as time passes, there is going to be less and less expty seats on the flights). Moreover, we can see that the price initually increases for flights lasting up until 20 hours. Afterwards, the price starts decreasing (although it retains a higher variance). This can be explained by the fact that flights lasting too long are not convenient and not appealing enough to customers, who are more likely to choose other modes of transport, or closer destinations.
+We can firstly identify the negative reletionship between the price of the ticket and the number of days left before the flight. This can easily be attributed to the increase in demand for the ticket, and lack of supply for flights. In fact, as time passes there is going to be less expty seats on the flights. It is also interesting to note the sharp decrease in price right as the number of days left until the flight approaches zero. This might be due to the fact that booking a flight the day of has a number of risks so high that a lower price is needed to maintain the exchange balanced.
+
+Moreover, we can see that the price initually increases for flights lasting up until 20 hours. This can be deriving from a variety of factors. Flights that have higher duration times are going to have to cover higher costs, that are going to show up in the form of higher prices for the customers. In fact, flights with higher duration - and hence longer routes - require more fuel for the plane. Moreover, longer flights require higher wages for the entire crew. A final aspect to consider is the need for refreshments for passengers spending more hours on the plane. All these are costs that increase the final price of the flight. However, the price starts decreasing after the duration value surpasses 20 hours (although it retains a higher variance). This can be explained by the fact that flights lasting too long are not convenient and not appealing enough to customers, who are more likely to choose other modes of transport, or closer destinations.
 
   
 ## Methods
