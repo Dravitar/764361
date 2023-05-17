@@ -87,7 +87,7 @@ We also compared the metrics after tuning the hyperparameters. Even though the M
 Moreover, we decided to use the Linear Regression model as our baseline. This is a classic model for regression problems, but it is also very simple. 
 
 In addition to the better evaluation metrics, we noted other advantages of Random Forest. In particular, Random Forest is an algorithm able to perform well with a large number of input variables and to identify the most important variables for prediction. Moreover, it is less prone to overfitting than Decision Trees. Finally, the training times for Random Forest are much faster than in other algorithms (namely KNN and SVR). This makes Random Forest a more efficient and beneficial choice.
-___
+
 
 
 ## Results 
@@ -96,7 +96,13 @@ i. Main finding(s): report your final results and what you might conclude from y
 ii. Include at least one placeholder figure and/or table for communicating your findings
 iii. All the figures containing results should be generated from the code.
 
+
 ## Conclusions
-List some concluding remarks. In particular:
-i. Summarize in one paragraph the take-away point from your work.
-Include one paragraph to explain what questions may not be fully answered by your work as well as natural next steps for this direction of future work
+This project aimed to predict flight prices using a provided dataset for the benefit of both customers and airlines. The Random Forest algorithm emerged as the best-performing model, demonstrating its effectiveness in predicting flight prices accurately. The evaluation metrics, including MAE, RMSE, and R-squared, supported this conclusion.
+The project also highlighted the importance of considering the characteristics of the dataset, such as the imbalanced nature of the price variable and the relationships between different numerical variables. Exploratory data analysis revealed insights into factors influencing flight prices, such as flight duration, days left until the flight, and ticket class.
+
+However, it is important to note that this work may not fully address all questions related to flight price prediction. Further research could explore additional factors influencing prices, such as airline reputation, seasonal variations, and external factors like economic conditions or fuel prices. Additionally, incorporating customer-specific variables, such as travel preferences and loyalty programs, could enhance the accuracy of the predictions.
+
+For future work, it would be beneficial to investigate ensemble models or advanced techniques like gradient boosting to further improve the prediction accuracy. Additionally, integrating real-time data updates and continuous model retraining can enhance the model's performance in dynamic market conditions.
+
+Overall, this project provides valuable insights and a strong foundation for predicting flight prices, enabling customers and airlines to make informed decisions.
