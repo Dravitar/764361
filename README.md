@@ -9,7 +9,10 @@ Arianna Bucca (764361), Angela Jane Salazar Hernandez (766411), Nathan Alexander
   The dataset provided by the company serves as the foundation for our analysis. It includes several variables describing flights tickets for various airlines concentrated in Asia. There is information on the name of the airline, the flight number, the price of the ticket, the city and time of departure, the city and time of arrival, the number of stops on the flight, the class of the ticket, the duration of the flight, and the number of days between the date of data collection and the date of departure. It is also necessary to note that the price of the ticket is in rupees, since the flights are all connecting Indian cities.
   
 ## Exploratory Data Analysis
-  1. correlation matrix description
+  After making sure the dataset did not have any null or duplicated variables, we moved on to analyzing the correlation matrix.
+  ![Alt text](https://github.com/Dravitar/764361/blob/main/Flight%20corr.png)
+
+
   2. numerical variables distribution
   4. relationship between price and: days left , duration
   5. target variable distribution
