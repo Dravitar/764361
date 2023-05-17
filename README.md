@@ -15,7 +15,7 @@ After making sure the dataset did not have any null or duplicated variables, we 
   
 *Fig 1*: Correlation Matrix| 
 :-------------------------:|
-![](https://github.com/Dravitar/764361/blob/main/Flight%20corr.png)  |
+![](https://github.com/Dravitar/764361/blob/main/images/Flight%20corr.png)  |
 
 As you can see from *Fig 1*, the numerical variable most related to our target variable Price is the one concerning the duration of the flight. In general, however, the values on the correlation matrix are not very strong.
 
@@ -23,7 +23,7 @@ We then moved on to analyzing the distribution of the target variables itself, a
 
 *Fig 2*: Price distribution - Histogram|*Fig 5*: Price distribution - Boxplot
 :-------------------------:|:-------------------------:
-![](https://github.com/Dravitar/764361/blob/main/Target%20distribution.png)  |  ![](https://github.com/Dravitar/764361/blob/main/Class_boxplots.png)
+![](https://github.com/Dravitar/764361/blob/main/images/Target%20distribution.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/Class_boxplots.png)
 
 From this, we were able to identify two important characteristics of our data. To begin with, there is a sharp division between the price of tickets in economy class and business class. This is justified as higher classes include more benefits and require more expensive tickets. Moreover, we can clearly see from the image how the Price variable is not normally distributed. This makes the dataset imbalanced, and increases the probability of business class tickets being underepresented in our model. Therfore, we will have to take this into consideration before running our models.
 
@@ -31,7 +31,7 @@ We then moved on to visualizing the distribution of the other numerical variable
 
 *Fig 4*: Distribution of days left data|*Fig 5*: Distribution of flight duration data
 :-------------------------:|:-------------------------:
-![](https://github.com/Dravitar/764361/blob/main/pics/daysleft_distr.png)  |  ![](https://github.com/Dravitar/764361/blob/main/pics/duration_distr.png)
+![](https://github.com/Dravitar/764361/blob/main/images/daysleft_distr.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/duration_distr.png)
 
 These graphs confirm what we had already seen in the correlation matrix. In particular, we see a strong resemblance between the Duration and the Price variable. This can be deriving from a variety of factors. Flights that have higher duration times are going to have to cover higher costs, that are going to show up in the form of higher prices for the customers. In fact, flights with higher duration - and hence longer routes - require more fuel for the plane. Moreover, longer flights require higher wages for the entire crew. A final aspect to consider is the need for refreshments for passengers spending more hours on the plane. All these are costs that increase the final price of the flight.
 
@@ -39,7 +39,7 @@ We proceeded to visualize the relationship between our target variable and our n
 
 *Fig 6*: Price according to the days left until the flight|*Fig 7*: Price according to the duration of the flight
 :-------------------------:|:-------------------------:
-![](https://github.com/Dravitar/764361/blob/main/pics/price_daysleft.png)  |  ![](https://github.com/Dravitar/764361/blob/main/pics/price_duration.png)
+![](https://github.com/Dravitar/764361/blob/main/images/price_daysleft.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/price_duration.png)
 
 We can identify the negative reletionship between the price of the ticket and the number of days left before the flight. This can easily be attributed to the increase in demand for the ticket, and lack of supply for flights (we can imagine that as time passes, there is going to be less and less expty seats on the flights). Moreover, we can see that the price initually increases for flights lasting up until 20 hours. Afterwards, the price starts decreasing (although it retains a higher variance). This can be explained by the fact that flights lasting too long are not convenient and not appealing enough to customers, who are more likely to choose other modes of transport, or closer destinations.
 
@@ -69,11 +69,11 @@ After testing all the algorithms, we decided the best performing one was Random 
 
 
 ## Experimental Design
-After running the different algorithms, we elected Random Forest as the best performing one. This decision was supported by a variety of reasons. To begin with, we compared different evaluation metrics (*Fig 9*).
+After running the different algorithms, we elected Random Forest as the best performing one. This decision was supported by a variety of reasons. To begin with, we compared different evaluation metrics (*Fig 8*).
 
-*Fig 9*: Evaluation Metrics| 
+*Fig 8*: Evaluation Metrics| 
 :-------------------------:|
-![](https://github.com/Dravitar/764361/blob/main/pics/Evaluation%20metrics.png)  |
+![](https://github.com/Dravitar/764361/blob/main/images/Evaluation%20metrics.png)  |
 
 We considered the Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and R squared. The R squared produced high results for all models, but due to the high number of variables (deriving from encoding the categorical variables) we considered the MAE and RMSE to be more reliable metrics. Regardless of the choice, it is clear from *Fig 9* that the best performing algorithm is Random Forest.
 We also compared the metrics after tuning the hyperparameters. Even though the MAE of the Random Forest Regressor model with default parameters is lower, the minimum samples in leaf nodes is 1. This means the model is susceptible to noise and the max depth is much higher. This could lead to overfitting and may cause problems with new data. The RMSE and the R-squared values are slighly improved. Either way, in both cases the models are robust. Therefore, in our final choice we prioritized having a better generelazition.
