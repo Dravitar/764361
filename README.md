@@ -53,7 +53,9 @@ Finally, we decided to look more into the categorical variables at our disposal.
 *Fig 10*: Range of price values for each route|*Fig 11*: Range of price values for departure and arrival time
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/images/price_route_boxplots.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/price_time_boxplots.png)
-  
+
+We then created a box plot showing the price on the y axis, the city of departure on the x axis, and the city of distination as the color of the boxes (*Fig 10*). We can identify how some cities seem to have higher ranges in price. For instance, Delhi is the city with the lowest price and smallest range, regardless of whether it is a source or destination city. In *Fig 11*, instead, we
+
 
 ## Methods
 In order to meet the goals of our project, we tested and evaluated different regression algorithms. However, before doing that we took some measures to help with the imbalance in our target variable. In particular, we decided to do a stratified sampling on our data, splitting the "bins" into batches each containing 20% of the total sample. This helped us better divide the data into training and test sets, providing a more robust model. Stratified sampling allowed us to avoid underrepresenting or overrpepreseting outliers, while still maintaining the original distribution of our data, natural for the airfare market.
