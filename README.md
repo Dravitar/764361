@@ -86,6 +86,14 @@ After conducting a comprehensive analysis and testing different regression algor
 :-------------------------:|
 ![](https://github.com/Dravitar/764361/blob/main/images/Evaluation%20metrics.png)  |
 
+In addition, we were able to use Random Forest to identify the most important variables in our model.
+
+*Fig 13*: Features by Importance| 
+:-------------------------:|
+![](https://github.com/Dravitar/764361/blob/main/images/feature%20importance.png)  |
+
+*Fig 13* shows the list of features from our dataset in order of importance. By far, the most significant variable is the one concerning the class of the ticket, followed by duration and days left until the flight. All the categorical variables, instead, have a much lower importance on the model. This information is in line with what had emerged from our initial analysis.
+
 Exploratory Data Analysis revealed several insights into the factors influencing flight prices. Firstly, we observed a positive correlation between the duration of the flight and the price of the ticket. This can be attributed to various cost factors associated with longer flights, such as fuel expenses, crew wages, and passenger amenities. In addition, the prices tend to drop once the duration of the flight surpasses 20 hours. This is likely due to the low convenience and comfortability of traveling for such long times, making these flights less regarded by customers. Understanding these relationships helps explain the variation in prices across different flights.
 
 Furthermore, the analysis highlighted a clear distinction between economy class and business class ticket prices. Business class tickets tend to have significantly higher prices due to additional benefits and services provided. This finding emphasizes the importance of considering ticket class as a significant predictor of flight prices.
