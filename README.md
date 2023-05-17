@@ -48,7 +48,7 @@ Finally, we decided to look more into the categorical variables at our disposal.
 :-------------------------:|:-------------------------:
 ![](https://github.com/Dravitar/764361/blob/main/images/airlines_boxplots.png)  |  ![](https://github.com/Dravitar/764361/blob/main/images/stops_boxplots.png)
 
-*Fig 8* once again highlighted how economy class tickets are significantly lower than business class tickets, as we had already noted from *Fig 2* and *Fig 3*. However, thanks to this boxplot we were also able to see that Vistara e Air India are the only airlines with business class tickets available.
+*Fig 8* once again highlighted how economy class tickets are significantly lower than business class tickets, as we had already noted from *Fig 2* and *Fig 3*. However, thanks to this boxplot we were also able to see that Vistara e Air India are the only airlines with business class tickets available. Instead, *Fig 9* allows us to understand the range in price for flights with different amounts of stops. Flights with one stop have a much higher price range than flights with zero, or more than two stops. Despite this, flights with zero and two or more stops have a larger number of outliers.
 
 
 
