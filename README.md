@@ -63,6 +63,8 @@ In order to meet the goals of our project, we tested and evaluated different reg
 * from sklearn.model_selection import RandomizedSearchCV
 * from sklearn.model_selection import GridSearchCV
   
+Another aspect to note is that we decided to discard SVR throughout the testing process. This is due to the extremely long run time and lower performance metrics compared to the other algorithms tried.
+
 After testing all the algorithms, we decided the best performing one was Random Forest (we will explain more about this decision in the following paragraph). To conclude the model training, we proceeded to tune our hyperparameters. We did this by testing both a randomized search on hyperparameters, and grid search. After testing different options, we selected the following parameters for the final model: "max_depth": 30, "min_samples_leaf": 8, "min_samples_split": 15, "n_estimators": 300.
 
 Finally, you can observe in *Fig 8* the flowchart illustrating the path in algorithm testing.
@@ -84,15 +86,9 @@ We also compared the metrics after tuning the hyperparameters. Even though the M
 
 Moreover, we decided to use the Linear Regression model as our baseline. This is a classic model for regression problems, but it is also very simple. 
 
-In addition to the better evaluation metrics, we noted other advantages of Random Forest. 
-
-Finally, the run time for Random Forest is much faster than in other algorithms (namely KNN and SVR). This makes it a more efficient choice.
+In addition to the better evaluation metrics, we noted other advantages of Random Forest. In particular, Random Forest is an algorithm able to perform well with a large number of input variables and to identify the most important variables for prediction. Moreover, it is less prone to overfitting than Decision Trees. Finally, the training times for Random Forest are much faster than in other algorithms (namely KNN and SVR). This makes Random Forest a more efficient and beneficial choice.
 ___
-## Experimental Design
-Describe any experiments conducted to validate the target contribution(s) of the project. Indicate the main purpose of each experiment, in particular:
-i. The main purpose: 1-2 sentence high-level explanation
-ii. Baseline(s): describe the method(s) that you used to compare your work to
-iii. Evaluation Metrics(s): which ones did you use and why?
+
 
 ## Results 
 Describe the following:
